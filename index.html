@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastors-Gridder - Professional CSS Grid Utility Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e4e4e7;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .grid-example {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 0.375rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            min-height: 80px;
+        }
+
+        .code-block {
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .section {
+            scroll-margin-top: 100px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #18181b;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: static;
+                max-height: none;
+            }
+        }
+
+        .demo-grid-auto {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .demo-grid-cols-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .demo-grid-sidebar {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1rem;
+        }
+
+        .demo-col-span-2 {
+            grid-column: span 2;
+        }
+
+        .demo-row-span-2 {
+            grid-row: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .demo-grid-sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-sm border-b border-zinc-800 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="https://avatars.githubusercontent.com/u/190840444?s=200&v=4" alt="Logo"
+                        class="w-10 h-10 rounded-lg">
+                    <div>
+                        <h1 class="text-xl font-bold gradient-text">Mastors-Gridder</h1>
+                        <p class="text-xs text-zinc-400">CSS Grid Utility Library</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#introduction" class="nav-link text-sm">Introduction</a>
+                    <a href="#installation" class="nav-link text-sm">Installation</a>
+                    <a href="#css-classes" class="nav-link text-sm">CSS Classes</a>
+                    <a href="#scss-mixins" class="nav-link text-sm">SCSS Mixins</a>
+                    <a href="#examples" class="nav-link text-sm">Examples</a>
+                </div>
+                <a href="https://github.com/KEHEM-IT/Mastors-Gridder" target="_blank"
+                    class="gradient-bg text-white px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition">
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <img src="https://avatars.githubusercontent.com/u/190840444?s=200&v=4" alt="Logo"
+                class="w-24 h-24 mx-auto mb-6 rounded-2xl">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                <span class="gradient-text">Mastors-Gridder</span>
+            </h1>
+            <p class="text-xl text-zinc-400 mb-8 max-w-3xl mx-auto">
+                Professional-grade CSS Grid utility library for modern web layouts. Build responsive, complex layouts
+                with ease using pure CSS classes or powerful SCSS mixins.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="#installation"
+                    class="gradient-bg text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                    Get Started
+                </a>
+                <a href="https://github.com/KEHEM-IT/Mastors-Gridder" target="_blank"
+                    class="bg-zinc-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-zinc-700 transition">
+                    View on GitHub
+                </a>
+            </div>
+            <div class="mt-12 flex flex-wrap gap-8 justify-center text-sm">
+                <div>
+                    <div class="text-2xl font-bold gradient-text">25+</div>
+                    <div class="text-zinc-400">Grid Utilities</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold gradient-text">Zero</div>
+                    <div class="text-zinc-400">Dependencies</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold gradient-text">100%</div>
+                    <div class="text-zinc-400">Production Ready</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Sidebar -->
+            <aside class="md:w-64 sidebar">
+                <div class="bg-zinc-900 rounded-lg p-4 border border-zinc-800">
+                    <h3 class="font-bold mb-4 text-sm uppercase tracking-wide text-zinc-400">Contents</h3>
+                    <nav class="space-y-2 text-sm">
+                        <a href="#introduction"
+                            class="block py-1 text-zinc-300 hover:text-purple-400 transition">Introduction</a>
+                        <a href="#features" class="block py-1 text-zinc-300 hover:text-purple-400 transition">Key
+                            Features</a>
+                        <a href="#installation"
+                            class="block py-1 text-zinc-300 hover:text-purple-400 transition">Installation</a>
+                        <a href="#quick-start" class="block py-1 text-zinc-300 hover:text-purple-400 transition">Quick
+                            Start</a>
+
+                        <div class="pt-4 mt-4 border-t border-zinc-800">
+                            <h4 class="font-semibold mb-2 text-zinc-400">CSS Classes</h4>
+                            <a href="#responsive-grid"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Responsive
+                                Grids</a>
+                            <a href="#fixed-grid"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Fixed Grids</a>
+                            <a href="#layout-patterns"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Layout
+                                Patterns</a>
+                            <a href="#grid-items"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Grid Items</a>
+                            <a href="#alignment"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Alignment</a>
+                        </div>
+
+                        <div class="pt-4 mt-4 border-t border-zinc-800">
+                            <h4 class="font-semibold mb-2 text-zinc-400">SCSS Mixins</h4>
+                            <a href="#scss-responsive"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Responsive
+                                Mixins</a>
+                            <a href="#scss-fixed"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Fixed Mixins</a>
+                            <a href="#scss-layouts"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition pl-2">Layout Mixins</a>
+                        </div>
+
+                        <div class="pt-4 mt-4 border-t border-zinc-800">
+                            <a href="#examples" class="block py-1 text-zinc-300 hover:text-purple-400 transition">Real
+                                Examples</a>
+                            <a href="#best-practices"
+                                class="block py-1 text-zinc-300 hover:text-purple-400 transition">Best Practices</a>
+                        </div>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="flex-1">
+                <!-- Introduction -->
+                <section id="introduction" class="section mb-16">
+                    <h2 class="text-3xl font-bold mb-4 gradient-text">Introduction</h2>
+                    <p class="text-zinc-300 mb-4">
+                        Mastors-Gridder is a comprehensive CSS Grid utility library that provides everything you need to
+                        build responsive, complex layouts with ease. Whether you prefer using utility classes in your
+                        HTML or SCSS mixins in your stylesheets, Mastors-Gridder has you covered.
+                    </p>
+                    <p class="text-zinc-300">
+                        No build tools required for CSS classes—just pure CSS ready to use. For SCSS users, powerful
+                        mixins provide even greater flexibility and customization.
+                    </p>
+                </section>
+
+                <!-- Features -->
+                <section id="features" class="section mb-16">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">Key Features</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
+                            <div class="text-2xl mb-2">🎯</div>
+                            <h3 class="text-xl font-bold mb-2">Auto-Responsive Grids</h3>
+                            <p class="text-zinc-400">Automatically adapt to any screen size with auto-fit and auto-fill
+                                grids.</p>
+                        </div>
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
+                            <div class="text-2xl mb-2">📐</div>
+                            <h3 class="text-xl font-bold mb-2">Fixed Grid Systems</h3>
+                            <p class="text-zinc-400">Traditional 12-column grids and custom fixed layouts for precise
+                                control.</p>
+                        </div>
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
+                            <div class="text-2xl mb-2">🎨</div>
+                            <h3 class="text-xl font-bold mb-2">Layout Patterns</h3>
+                            <p class="text-zinc-400">Pre-built patterns like sidebar, holy grail, and full-bleed
+                                layouts.</p>
+                        </div>
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
+                            <div class="text-2xl mb-2">⚡</div>
+                            <h3 class="text-xl font-bold mb-2">Zero Dependencies</h3>
+                            <p class="text-zinc-400">Pure CSS and SCSS with no external dependencies or build
+                                requirements.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installation -->
+                <section id="installation" class="section mb-16">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">Installation</h2>
+
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-3">Via CDN (Recommended)</h3>
+                        <p class="text-zinc-400 mb-3">Add this link in your HTML <code
+                                class="text-purple-400">&lt;head&gt;</code>:</p>
+                        <div class="code-block">
+                            <span class="text-purple-400">&lt;link</span> <span class="text-blue-400">rel</span>=<span
+                                class="text-green-400">"stylesheet"</span>
+                            <span class="text-blue-400">href</span>=<span
+                                class="text-green-400">"https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css"</span>
+                            <span class="text-purple-400">/&gt;</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-3">Via NPM</h3>
+                        <div class="code-block mb-3">
+                            <span class="text-blue-400">npm</span> i mastors-gridder
+                        </div>
+                        <p class="text-zinc-400 mb-2">Then import in your CSS or SCSS:</p>
+                        <div class="code-block">
+                            <span class="text-purple-400">@import</span> <span
+                                class="text-green-400">"mastors-gridder"</span>;
+                        </div>
+                        <p class="text-zinc-400 mt-3 mb-2">Or for SCSS with namespace:</p>
+                        <div class="code-block">
+                            <span class="text-purple-400">@use</span> <span
+                                class="text-green-400">"mastors-gridder"</span> <span class="text-purple-400">as</span>
+                            *;
+                        </div>
+                    </div>
+                </section>
