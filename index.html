@@ -77,9 +77,9 @@
             position: relative;
             border: 2px solid #334155;
             border-radius: 0.75rem;
-            overflow: hidden;
+            overflow-x: auto;
             resize: horizontal;
-            min-width: 300px;
+            min-width: 200px;
             max-width: 100%;
             padding: 1rem;
             background: #1e293b;
@@ -180,10 +180,9 @@
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                    <img src="https://kehem-it.github.io/Mastors-Fluider/assets/Mastors-Fluider-Logo.png"
-                        alt="Mastors Gridder" class="h-12">
+                    <img src="assets/gridder-logo.png" alt="Mastors Gridder" class="h-12">
                     <div>
-                        <h1 class="text-2xl font-bold gradient-text">Mastors Gridder</h1>
+                        <h1 class="text-2xl md:text-xl font-bold gradient-text">Mastors Gridder</h1>
                         <p class="text-sm text-gray-400">v1.0.0 - Latest Release</p>
                     </div>
                 </div>
@@ -193,7 +192,7 @@
                         <i class="fab fa-github"></i> GitHub
                     </a>
                     <a href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css"
-                        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors flex items-center gap-2">
+                        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors flex items-center gap-2 md:block hidden">
                         <i class="fas fa-download"></i> CDN
                     </a>
                 </div>
@@ -202,8 +201,9 @@
     </header>
 
     <!-- Navigation -->
-    <nav class="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 sticky top-[73px] z-40">
-        <div class="max-w-7xl mx-auto px-4">
+    <nav
+        class="w-full flex bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 sticky top-[5.3rem] md:top-[6rem]-40">
+        <div class="max-w-7xl mx-auto px-4 overflow-x-auto">
             <div class="flex gap-2 overflow-x-auto py-3">
                 <a href="#overview" class="nav-link text-gray-300 whitespace-nowrap"><i
                         class="fas fa-home mr-2"></i>Overview</a>
@@ -649,7 +649,8 @@
 
                     <div class="mt-6">
                         <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                        <div class="overflow-x-auto"
+                            style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
                             <div class="demo-item" style="grid-column: span 2;">Spans 2 Columns</div>
                             <div class="demo-item">Normal</div>
                             <div class="demo-item">Normal</div>
@@ -708,7 +709,7 @@
 }</code></pre>
                     </div>
 
-                    <div class="mt-6">
+                    <div class="mt-6 overflow-x-auto">
                         <h4 class="text-lg font-semibold mb-3">Live Demo (Drag to resize):</h4>
                         <div class="resizable-demo" style="width: 100%;">
                             <div style="display: grid; grid-template-columns: 200px 1fr; gap: 1rem; min-height: 200px;">
@@ -763,7 +764,7 @@
 }</code></pre>
                     </div>
 
-                    <div class="mt-6">
+                    <div class="mt-6 overflow-x-auto">
                         <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
                         <div
                             style="display: grid; grid-template-columns: 100px 1fr 100px; grid-template-rows: auto 1fr auto; grid-template-areas: 'header header header' 'sidebar-left content sidebar-right' 'footer footer footer'; gap: 0.5rem; min-height: 300px;">
@@ -1260,7 +1261,7 @@
                                 }</code></pre>
                             </div>
 
-                            <div class="mt-6">
+                            <div class="mt-6 overflow-x-auto">
                                 <h5 class="font-semibold mb-3">Live Demo:</h5>
                                 <div class="grid-holy-grail gap-sm" style="min-height: 300px;">
                                     <div class="demo-item grid-area-header">Header</div>
@@ -1551,7 +1552,7 @@
                                 }</code></pre>
                     </div>
 
-                    <div class="mt-6">
+                    <div class="mt-6 overflow-x-auto ">
                         <h4 class="text-lg font-semibold mb-3">Live Demo:</h4>
                         <div class="grid-sidebar gap-lg" style="min-height: 400px;">
                             <div class="demo-item">Sidebar Navigation</div>
@@ -1732,8 +1733,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script>
-        // Scroll Indicator
+    <script>// Scroll Indicator
         window.addEventListener('scroll', () => {
             const indicator = document.getElementById('scrollIndicator');
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -1742,6 +1742,32 @@
             indicator.style.transform = `scaleX(${scrolled / 100})`;
         });
 
+        // Update active nav link
+        function updateActiveNav(activeLink) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-blue-400', 'bg-blue-500/10');
+            });
+
+            activeLink.classList.add('text-blue-400', 'bg-blue-500/10');
+        }
+
+        // Center nav link in scrollable nav bar
+        function centerNavLink(link) {
+            const navContainer = link.parentElement;
+            const linkRect = link.getBoundingClientRect();
+            const containerRect = navContainer.getBoundingClientRect();
+
+            const offset =
+                linkRect.left -
+                containerRect.left -
+                containerRect.width / 2 +
+                linkRect.width / 2;
+
+            navContainer.scrollBy({
+                left: offset,
+                behavior: 'smooth'
+            });
+        }
 
         // Smooth scroll with center positioning
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1751,97 +1777,44 @@
                 if (target) {
                     const offset = window.innerHeight / 2 - target.offsetHeight / 2;
                     const targetPosition = target.offsetTop - offset;
+
                     window.scrollTo({
                         top: Math.max(0, targetPosition),
                         behavior: 'smooth'
                     });
 
-                    // Update active nav link
                     updateActiveNav(this);
-
-                    // Center the nav link
                     centerNavLink(this);
                 }
             });
         });
 
-        // Update active navigation link
-        function updateActiveNav(activeLink) {
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.classList.remove('text-white', 'bg-white/10');
-                link.classList.add('text-dark-muted');
-            });
-            console.log('idadz')
+        function switchTab(event, targetId) {
+            const clickedTab = event.currentTarget;
 
-            activeLink.classList.remove('text-dark-muted');
-            activeLink.classList.add('text-white', 'bg-white/10');
+            // Find the nearest parent that contains this tab set
+            const tabWrapper = clickedTab.closest('.code-tabs').parentElement;
+
+            // Remove active class from all tabs in this section
+            tabWrapper.querySelectorAll('.code-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all content panels in this section
+            tabWrapper.querySelectorAll('.code-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Activate clicked tab
+            clickedTab.classList.add('active');
+
+            // Activate related content
+            const targetContent = tabWrapper.querySelector(`#${targetId}`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
         }
 
-        // Center navigation link in viewport
-        function centerNavLink(link) {
-            const navContainer = document.getElementById('navContainer');
-            const linkRect = link.getBoundingClientRect();
-            const containerRect = navContainer.getBoundingClientRect();
-
-            const scrollLeft = navContainer.scrollLeft;
-            const linkCenter = linkRect.left - containerRect.left + linkRect.width / 2;
-            const containerCenter = containerRect.width / 2;
-
-            navContainer.scrollTo({
-                left: scrollLeft + linkCenter - containerCenter,
-                behavior: 'smooth'
-            });
-        }
-
-        // Highlight current section on scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('text-white', 'bg-white/10');
-                link.classList.add('text-dark-muted');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.remove('text-dark-muted');
-                    link.classList.add('text-white', 'bg-white/10');
-
-                    console.log('idadz')
-                    // Auto-center on scroll
-                    if (!link.classList.contains('manually-clicked')) {
-                        centerNavLink(link);
-                    }
-                }
-            });
-        });
-
-        // Copy code functionality
-        function copyCode(button) {
-            const codeBlock = button.closest('div').parentElement;
-            const code = codeBlock.querySelector('pre code').textContent;
-
-            navigator.clipboard.writeText(code).then(() => {
-                const originalHTML = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
-                button.classList.add('bg-green-500', 'hover:bg-green-600');
-                button.classList.remove('bg-white/10', 'hover:bg-white/20');
-
-                setTimeout(() => {
-                    button.innerHTML = originalHTML;
-                    button.classList.remove('bg-green-500', 'hover:bg-green-600');
-                    button.classList.add('bg-white/10', 'hover:bg-white/20');
-                }, 2000);
-            });
-        }
     </script>
 </body>
 
