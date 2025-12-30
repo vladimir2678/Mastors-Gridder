@@ -32,7 +32,10 @@ A powerful, flexible, and production-ready SCSS grid utility library that provid
 Add this link in your HTML `<head>`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/KEHEM-IT/Mastors-Gridder@main/mastors-gridder.css"
+/>
 ```
 
 ### Via NPM
@@ -46,13 +49,13 @@ npm i mastors-gridder
 Then import in your SCSS file:
 
 ```scss
-@use 'mastors-gridder' as *;
+@use "mastors-gridder" as *;
 ```
 
 Or with a custom namespace:
 
 ```scss
-@use 'mastors-gridder' as grid;
+@use "mastors-gridder" as grid;
 
 // Usage: @include grid.grid-auto(250px, 1rem);
 ```
@@ -62,7 +65,7 @@ Or with a custom namespace:
 Download `_mastors-gridder.scss` and import it:
 
 ```scss
-@import 'path/to/mastors-gridder';
+@import "path/to/mastors-gridder";
 ```
 
 ---
@@ -101,14 +104,73 @@ Download `_mastors-gridder.scss` and import it:
 
 ## 🎯 Grid Mixins Overview
 
-| Category | Mixins | Use Case |
-|----------|--------|----------|
-| **Responsive** | `grid-auto`, `grid-fill`, `grid-cards` | Auto-responsive grids |
-| **Fixed** | `grid-cols`, `grid-rows`, `grid-template` | Fixed column/row grids |
-| **Layouts** | `grid-sidebar`, `grid-holy-grail`, `grid-full-bleed` | Common layout patterns |
-| **Items** | `grid-span`, `grid-area`, `grid-order` | Grid item positioning |
-| **Alignment** | `grid-center`, `grid-align`, `grid-self` | Content alignment |
-| **Utilities** | `grid-gap`, `grid-dense`, `grid-subgrid` | Special functionality |
+| Category       | Mixins                                               | Use Case               |
+| -------------- | ---------------------------------------------------- | ---------------------- |
+| **Responsive** | `grid-auto`, `grid-fill`, `grid-cards`               | Auto-responsive grids  |
+| **Fixed**      | `grid-cols`, `grid-rows`, `grid-template`            | Fixed column/row grids |
+| **Layouts**    | `grid-sidebar`, `grid-holy-grail`, `grid-full-bleed` | Common layout patterns |
+| **Items**      | `grid-span`, `grid-area`, `grid-order`               | Grid item positioning  |
+| **Alignment**  | `grid-center`, `grid-align`, `grid-self`             | Content alignment      |
+| **Utilities**  | `grid-gap`, `grid-dense`, `grid-subgrid`             | Special functionality  |
+
+---
+
+## 📊 Quick Reference Table
+
+Complete list of all mixins with parameters, defaults, and usage examples.
+
+### Responsive Grid Mixins
+
+| Mixin          | Parameters                     | Defaults                 | Usage Example                              |
+| -------------- | ------------------------------ | ------------------------ | ------------------------------------------ |
+| `grid-auto`    | `$min`, `$gap`                 | `250px`, `1rem`          | `@include grid-auto(300px, 2rem);`         |
+| `grid-fill`    | `$min`, `$gap`                 | `250px`, `1rem`          | `@include grid-fill(280px, 1.5rem);`       |
+| `grid-cards`   | `$min`, `$max`, `$gap`         | `280px`, `1fr`, `1.5rem` | `@include grid-cards(300px, 400px, 2rem);` |
+| `grid-dense`   | `$min`, `$gap`                 | `150px`, `1rem`          | `@include grid-dense(200px, 1.5rem);`      |
+| `grid-stacked` | `$cols`, `$gap`, `$breakpoint` | `2`, `1rem`, `640px`     | `@include grid-stacked(3, 1.5rem, 768px);` |
+
+### Fixed Grid Mixins
+
+| Mixin             | Parameters          | Defaults         | Usage Example                                    |
+| ----------------- | ------------------- | ---------------- | ------------------------------------------------ |
+| `grid-cols`       | `$cols`, `$gap`     | `12`, `1rem`     | `@include grid-cols(4, 1.5rem);`                 |
+| `grid-rows`       | `$rows`, `$gap`     | `3`, `1rem`      | `@include grid-rows(5, 2rem);`                   |
+| `grid-template`   | `$template`, `$gap` | required, `1rem` | `@include grid-template(200px 1fr 300px, 2rem);` |
+| `grid-equal-rows` | `$rows`, `$gap`     | `3`, `1rem`      | `@include grid-equal-rows(4, 1rem);`             |
+
+### Layout Pattern Mixins
+
+| Mixin                     | Parameters                              | Defaults                 | Usage Example                                             |
+| ------------------------- | --------------------------------------- | ------------------------ | --------------------------------------------------------- |
+| `grid-sidebar`            | `$sidebar-width`, `$gap`, `$position`   | `300px`, `1rem`, `left`  | `@include grid-sidebar(250px, 2rem, left);`               |
+| `grid-sidebar-responsive` | `$sidebar-width`, `$gap`, `$breakpoint` | `300px`, `1rem`, `768px` | `@include grid-sidebar-responsive(280px, 1.5rem, 992px);` |
+| `grid-holy-grail`         | `$sidebar-width`, `$gap`                | `250px`, `1rem`          | `@include grid-holy-grail(200px, 1rem);`                  |
+| `grid-full-bleed`         | `$content-width`, `$gap`                | `1200px`, `1rem`         | `@include grid-full-bleed(800px, 2rem);`                  |
+| `grid-masonry`            | `$cols`, `$gap`                         | `3`, `1rem`              | `@include grid-masonry(4, 1.5rem);`                       |
+| `grid-asymmetric`         | `$ratio`, `$gap`                        | `2`, `1rem`              | `@include grid-asymmetric(3, 2rem);`                      |
+
+### Grid Item Mixins
+
+| Mixin        | Parameters                                         | Defaults                           | Usage Example                     |
+| ------------ | -------------------------------------------------- | ---------------------------------- | --------------------------------- |
+| `grid-span`  | `$col-span`, `$row-span`                           | `1`, `1`                           | `@include grid-span(2, 1);`       |
+| `grid-area`  | `$col-start`, `$col-end`, `$row-start`, `$row-end` | required, required, `auto`, `auto` | `@include grid-area(1, 4, 2, 4);` |
+| `grid-order` | `$order`                                           | `0`                                | `@include grid-order(-1);`        |
+
+### Alignment Mixins
+
+| Mixin         | Parameters           | Defaults           | Usage Example                         |
+| ------------- | -------------------- | ------------------ | ------------------------------------- |
+| `grid-center` | none                 | -                  | `@include grid-center;`               |
+| `grid-align`  | `$justify`, `$align` | `center`, `center` | `@include grid-align(start, center);` |
+| `grid-self`   | `$justify`, `$align` | `auto`, `auto`     | `@include grid-self(end, start);`     |
+
+### Utility Mixins
+
+| Mixin          | Parameters             | Defaults       | Usage Example                         |
+| -------------- | ---------------------- | -------------- | ------------------------------------- |
+| `grid-gap`     | `$row-gap`, `$col-gap` | `1rem`, `1rem` | `@include grid-gap(2rem, 1rem);`      |
+| `grid-subgrid` | `$rows`, `$cols`       | `true`, `true` | `@include grid-subgrid(false, true);` |
 
 ---
 
@@ -121,6 +183,7 @@ Download `_mastors-gridder.scss` and import it:
 Creates a **responsive grid** that automatically fits as many columns as possible based on minimum width.
 
 **Parameters:**
+
 - `$min`: Minimum width per column (default: `250px`)
 - `$gap`: Gap between items (default: `1rem`)
 
@@ -146,10 +209,12 @@ Creates a **responsive grid** that automatically fits as many columns as possibl
 Similar to `grid-auto`, but uses `auto-fill` instead of `auto-fit`. Creates **empty columns** if there's extra space.
 
 **Parameters:**
+
 - `$min`: Minimum width per column (default: `250px`)
 - `$gap`: Gap between items (default: `1rem`)
 
 **Difference from `grid-auto`:**
+
 - `auto-fit`: Collapses empty tracks, items stretch to fill space
 - `auto-fill`: Keeps empty tracks, items maintain consistent size
 
@@ -166,6 +231,7 @@ Similar to `grid-auto`, but uses `auto-fill` instead of `auto-fit`. Creates **em
 Responsive card grid with **min/max constraints** for better control.
 
 **Parameters:**
+
 - `$min`: Minimum card width (default: `280px`)
 - `$max`: Maximum card width (default: `1fr`)
 - `$gap`: Gap between cards (default: `1.5rem`)
@@ -185,6 +251,7 @@ Responsive card grid with **min/max constraints** for better control.
 Creates a grid with a **fixed number of columns**.
 
 **Parameters:**
+
 - `$cols`: Number of columns (default: `12`)
 - `$gap`: Gap between items (default: `1rem`)
 
@@ -208,6 +275,7 @@ Creates a grid with a **fixed number of columns**.
 Creates a grid with a **fixed number of rows**.
 
 **Parameters:**
+
 - `$rows`: Number of rows (default: `3`)
 - `$gap`: Gap between items (default: `1rem`)
 
@@ -224,6 +292,7 @@ Creates a grid with a **fixed number of rows**.
 Creates a grid with **custom column sizes**.
 
 **Parameters:**
+
 - `$template`: CSS grid-template-columns value
 - `$gap`: Gap between items (default: `1rem`)
 
@@ -247,6 +316,7 @@ Creates a grid with **custom column sizes**.
 Creates a **sidebar + main content** layout.
 
 **Parameters:**
+
 - `$sidebar-width`: Width of sidebar (default: `300px`)
 - `$gap`: Gap between sidebar and content (default: `1rem`)
 - `$position`: `left` or `right` (default: `left`)
@@ -269,6 +339,7 @@ Creates a **sidebar + main content** layout.
 Sidebar that **stacks on mobile** and appears side-by-side on larger screens.
 
 **Parameters:**
+
 - `$sidebar-width`: Width of sidebar (default: `300px`)
 - `$gap`: Gap between elements (default: `1rem`)
 - `$breakpoint`: When to switch to sidebar layout (default: `768px`)
@@ -286,6 +357,7 @@ Sidebar that **stacks on mobile** and appears side-by-side on larger screens.
 Classic **Holy Grail layout** (header, sidebar, content, footer).
 
 **Parameters:**
+
 - `$sidebar-width`: Width of sidebars (default: `250px`)
 - `$gap`: Gap between elements (default: `1rem`)
 
@@ -296,11 +368,21 @@ Classic **Holy Grail layout** (header, sidebar, content, footer).
 
 // HTML structure:
 .page {
-  .header { grid-area: header; }
-  .sidebar-left { grid-area: sidebar-left; }
-  .content { grid-area: content; }
-  .sidebar-right { grid-area: sidebar-right; }
-  .footer { grid-area: footer; }
+  .header {
+    grid-area: header;
+  }
+  .sidebar-left {
+    grid-area: sidebar-left;
+  }
+  .content {
+    grid-area: content;
+  }
+  .sidebar-right {
+    grid-area: sidebar-right;
+  }
+  .footer {
+    grid-area: footer;
+  }
 }
 ```
 
@@ -311,17 +393,18 @@ Classic **Holy Grail layout** (header, sidebar, content, footer).
 Grid that allows items to **break out** to full width while keeping content centered.
 
 **Parameters:**
+
 - `$content-width`: Max width of content area (default: `1200px`)
 - `$gap`: Gap between items (default: `1rem`)
 
 ```scss
 .article {
   @include grid-full-bleed(800px, 2rem);
-  
+
   > * {
     grid-column: 2; // Default content column
   }
-  
+
   .full-width-image {
     grid-column: 1 / -1; // Break out to full width
   }
@@ -335,13 +418,14 @@ Grid that allows items to **break out** to full width while keeping content cent
 Creates a **masonry-style layout** effect.
 
 **Parameters:**
+
 - `$cols`: Number of columns (default: `3`)
 - `$gap`: Gap between items (default: `1rem`)
 
 ```scss
 .masonry {
   @include grid-masonry(4, 1.5rem);
-  
+
   .item {
     grid-row-end: span 10; // Adjust based on content height
   }
@@ -357,6 +441,7 @@ Creates a **masonry-style layout** effect.
 Makes a grid item **span across multiple columns/rows**.
 
 **Parameters:**
+
 - `$col-span`: Number of columns to span (default: `1`)
 - `$row-span`: Number of rows to span (default: `1`)
 
@@ -377,6 +462,7 @@ Makes a grid item **span across multiple columns/rows**.
 Places item in a **specific grid area**.
 
 **Parameters:**
+
 - `$col-start`: Starting column line
 - `$col-end`: Ending column line
 - `$row-start`: Starting row line (default: `auto`)
@@ -399,6 +485,7 @@ Places item in a **specific grid area**.
 Changes the **visual order** of grid items without changing HTML.
 
 **Parameters:**
+
 - `$order`: Order value (default: `0`)
 
 ```scss
@@ -439,6 +526,7 @@ Centers content **both horizontally and vertically** within a grid cell.
 Aligns **all items** in the grid container.
 
 **Parameters:**
+
 - `$justify`: Horizontal alignment (default: `center`)
 - `$align`: Vertical alignment (default: `center`)
 
@@ -457,6 +545,7 @@ Aligns **all items** in the grid container.
 Aligns a **single grid item** within its cell.
 
 **Parameters:**
+
 - `$justify`: Horizontal self-alignment (default: `auto`)
 - `$align`: Vertical self-alignment (default: `auto`)
 
@@ -473,6 +562,7 @@ Aligns a **single grid item** within its cell.
 Sets **different gaps** for rows and columns.
 
 **Parameters:**
+
 - `$row-gap`: Vertical gap (default: `1rem`)
 - `$col-gap`: Horizontal gap (default: `1rem`)
 
@@ -489,6 +579,7 @@ Sets **different gaps** for rows and columns.
 Fills gaps by placing items **densely** (useful for varying item sizes).
 
 **Parameters:**
+
 - `$min`: Minimum item width (default: `150px`)
 - `$gap`: Gap between items (default: `1rem`)
 
@@ -505,6 +596,7 @@ Fills gaps by placing items **densely** (useful for varying item sizes).
 Creates rows with **equal height**.
 
 **Parameters:**
+
 - `$rows`: Number of rows (default: `3`)
 - `$gap`: Gap between rows (default: `1rem`)
 
@@ -521,6 +613,7 @@ Creates rows with **equal height**.
 Creates a **subgrid** (inherits parent grid lines).
 
 **Parameters:**
+
 - `$rows`: Use subgrid for rows (default: `true`)
 - `$cols`: Use subgrid for columns (default: `true`)
 
@@ -542,6 +635,7 @@ Creates a **subgrid** (inherits parent grid lines).
 **Mobile-first stacked grid** that expands on larger screens.
 
 **Parameters:**
+
 - `$cols`: Number of columns on desktop (default: `2`)
 - `$gap`: Gap between items (default: `1rem`)
 - `$breakpoint`: When to switch to multi-column (default: `640px`)
@@ -559,6 +653,7 @@ Creates a **subgrid** (inherits parent grid lines).
 Creates an **asymmetric 2-column layout** with custom ratio.
 
 **Parameters:**
+
 - `$ratio`: Ratio of first column (default: `2`)
 - `$gap`: Gap between columns (default: `1rem`)
 
@@ -577,14 +672,14 @@ Creates an **asymmetric 2-column layout** with custom ratio.
 ```scss
 .gallery {
   @include grid-auto(300px, 2rem);
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
   }
-  
+
   .featured {
     @include grid-span(2, 2);
   }
@@ -599,21 +694,21 @@ Creates an **asymmetric 2-column layout** with custom ratio.
 .dashboard {
   @include grid-template(250px 1fr, 1rem);
   min-height: 100vh;
-  
+
   .sidebar {
     @include grid-center;
     background: #f5f5f5;
   }
-  
+
   .main-content {
     @include grid-cols(3, 1.5rem);
     padding: 2rem;
-    
+
     .widget {
       padding: 1.5rem;
       background: white;
       border-radius: 8px;
-      
+
       &.large {
         @include grid-span(2, 1);
       }
@@ -629,15 +724,21 @@ Creates an **asymmetric 2-column layout** with custom ratio.
 ```scss
 .blog {
   @include grid-sidebar-responsive(300px, 2rem, 992px);
-  
+
   .article {
     @include grid-rows(auto 1fr auto, 1rem);
-    
-    .article-header { /* ... */ }
-    .article-content { /* ... */ }
-    .article-footer { /* ... */ }
+
+    .article-header {
+      /* ... */
+    }
+    .article-content {
+      /* ... */
+    }
+    .article-footer {
+      /* ... */
+    }
   }
-  
+
   .sidebar {
     .widget {
       padding: 1.5rem;
@@ -654,18 +755,18 @@ Creates an **asymmetric 2-column layout** with custom ratio.
 ```scss
 .products {
   @include grid-dense(280px, 1.5rem);
-  
+
   .product-card {
     background: white;
     border-radius: 8px;
     padding: 1rem;
-    
+
     &.featured {
       @include grid-span(2, 2);
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
     }
-    
+
     &.sale {
       @include grid-span(1, 2);
     }
@@ -680,18 +781,20 @@ Creates an **asymmetric 2-column layout** with custom ratio.
 ```scss
 .article {
   @include grid-full-bleed(800px, 2rem);
-  
-  h1, p, ul {
+
+  h1,
+  p,
+  ul {
     grid-column: 2; // Content column
   }
-  
+
   .full-width-image {
     grid-column: 1 / -1; // Break out to full width
     width: 100%;
     height: 500px;
     object-fit: cover;
   }
-  
+
   .highlight-box {
     grid-column: 1 / -1;
     background: #f0f0f0;
@@ -708,12 +811,12 @@ Creates an **asymmetric 2-column layout** with custom ratio.
 ```scss
 .nav {
   @include grid-stacked(4, 1rem, 768px);
-  
+
   a {
     @include grid-center;
     padding: 1rem;
     text-decoration: none;
-    
+
     &:hover {
       background: #f0f0f0;
     }
@@ -728,7 +831,7 @@ Creates an **asymmetric 2-column layout** with custom ratio.
 ```scss
 .page-layout {
   @include grid-holy-grail(200px, 1rem);
-  
+
   .header {
     grid-area: header;
     @include grid-center;
@@ -736,22 +839,22 @@ Creates an **asymmetric 2-column layout** with custom ratio.
     color: white;
     padding: 1rem;
   }
-  
+
   .sidebar-left {
     grid-area: sidebar-left;
     background: #f5f5f5;
   }
-  
+
   .content {
     grid-area: content;
     @include grid-auto(300px, 1.5rem);
   }
-  
+
   .sidebar-right {
     grid-area: sidebar-right;
     background: #f5f5f5;
   }
-  
+
   .footer {
     grid-area: footer;
     @include grid-center;
@@ -783,12 +886,12 @@ Start with mobile styles and use responsive mixins to adapt:
 .cards {
   // Mobile: 1 column
   @include grid-cols(1, 1rem);
-  
+
   @media (min-width: 768px) {
     // Tablet: 2 columns
     @include grid-cols(2, 1.5rem);
   }
-  
+
   @media (min-width: 1024px) {
     // Desktop: auto-responsive
     @include grid-auto(300px, 2rem);
@@ -821,12 +924,20 @@ Use descriptive class names that explain purpose:
 
 ```scss
 // ✅ Good
-.product-grid { @include grid-auto(280px); }
-.article-layout { @include grid-sidebar(300px); }
+.product-grid {
+  @include grid-auto(280px);
+}
+.article-layout {
+  @include grid-sidebar(300px);
+}
 
 // ❌ Avoid
-.grid-1 { @include grid-auto(280px); }
-.layout-2 { @include grid-sidebar(300px); }
+.grid-1 {
+  @include grid-auto(280px);
+}
+.layout-2 {
+  @include grid-sidebar(300px);
+}
 ```
 
 ---
@@ -836,14 +947,14 @@ Use descriptive class names that explain purpose:
 ```scss
 .complex-layout {
   @include grid-sidebar(250px, 2rem);
-  
+
   .sidebar {
     @include grid-rows(auto 1fr auto);
   }
-  
+
   .main-content {
     @include grid-auto(300px, 1.5rem);
-    
+
     .featured {
       @include grid-span(2, 1);
     }
@@ -856,6 +967,7 @@ Use descriptive class names that explain purpose:
 ### 6. **Test Responsiveness**
 
 Always test with:
+
 - Different screen sizes (mobile, tablet, desktop)
 - Different content amounts (1 item, 10 items, 100 items)
 - Different item sizes (varying heights, widths)
@@ -869,7 +981,7 @@ For nested grids that need to align with parent:
 ```scss
 .parent {
   @include grid-cols(4);
-  
+
   .nested {
     @include grid-span(2, 1);
     @include grid-subgrid(false, true); // Align with parent columns
@@ -898,6 +1010,7 @@ Yes! Mastors-Gridder is framework-agnostic and works alongside any CSS framework
 ### Why SCSS mixins instead of CSS classes?
 
 **Advantages of mixins:**
+
 - More semantic HTML (no utility class clutter)
 - Greater flexibility and customization
 - Better for component-based architecture
@@ -914,7 +1027,7 @@ CSS Grid is not fully supported in IE11. Use feature queries:
 .grid {
   display: flex; // Fallback
   flex-wrap: wrap;
-  
+
   @supports (display: grid) {
     @include grid-auto(300px);
   }
@@ -937,7 +1050,7 @@ Use browser DevTools:
 // Temporary debug styles
 .grid {
   @include grid-auto(300px);
-  
+
   > * {
     border: 1px solid red; // Visualize grid items
   }
